@@ -3,5 +3,10 @@
 define('ROOT_DIR', dirname(__DIR__));
 
 require ROOT_DIR . '/vendor/autoload.php';
+\Tracy\Debugger::enable();
 
-echo 'Hello, from the bootstrap file :)';
+$request = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
+$content = 'Hello ' . $request->get('name', 'stranger');
+$response = new \Symfony\Component\HttpFoundation\Response($content);
+$response->prepare($request);
+$response->send();
