@@ -6,7 +6,14 @@ require ROOT_DIR . '/vendor/autoload.php';
 \Tracy\Debugger::enable();
 
 $request = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
-$content = 'Hello ' . $request->get('name', 'stranger');
-$response = new \Symfony\Component\HttpFoundation\Response($content);
+
+$controller = new professional_php\FrontPage\Presentation\FrontPageController();
+$response = $controller->show($request);
+
+if (!$response instanceof \Symfony\Component\HTTPFoundation\Response) {
+    throw new \Exception('Controller methods must return a Response object');
+}
+
 $response->prepare($request);
 $response->send();
+
