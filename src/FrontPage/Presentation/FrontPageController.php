@@ -1,13 +1,17 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace professional_php\FrontPage\Presentation;
+declare(strict_types=1);
 
-use Symfony\Component\HTTPFoundation\Request;
-use Symfony\Component\HTTPFoundation\Response;
+namespace SocialNews\FrontPage\Presentation;
 
-final class FrontPageController {
-    public function show(Request $request) : Response {
-        $content = "Hello, " . $request->get('name', 'visitor');
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+final class FrontPageController
+{
+    public function show(Request $request): Response
+    {
+        $content = 'Hello, ' . $request->get('name', 'visitor');
         return new Response($content);
     }
 }
